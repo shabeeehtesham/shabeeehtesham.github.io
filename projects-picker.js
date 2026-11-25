@@ -20,6 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
             href: 'neurons-to-transformers.html',
             githubHref: 'https://github.com/shabeeehtesham/evolution-to-ai-agents-from-ml',
         },
+        {
+            id: 'nightwatch',
+            title: 'NIGHTWATCH',
+            tagline: 'A live OSINT globe built only from public data: flights, AIS ship traffic through the world\'s chokepoints, satellites propagated from TLEs, earthquakes, source-scored conflict reports from GDELT, news, submarine cables and ~9,000 public traffic and city cameras — served by an async FastAPI backend with per-source caching and graceful degradation.',
+            tags: ['FastAPI', 'WebSockets', 'three.js', 'OSINT'],
+            href: 'https://nightwatch-gv6o.onrender.com',
+            external: true,
+            githubHref: 'https://github.com/shabeeehtesham/nightwatch',
+        },
         // --- TEMPORARY placeholder entries, only here so the scroll/tick
         // interaction has more than one item to try. Not real projects -
         // href is '#' and githubHref points at the profile root, not a
@@ -121,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${project.tagline}</p>
             <div class="picker-tags">${project.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
             <div class="picker-preview-actions">
-                <a href="${project.href}" class="btn btn-primary btn-sm">View Project</a>
+                <a href="${project.href}"${project.external ? ' target="_blank" rel="noopener"' : ''} class="btn btn-primary btn-sm">${project.external ? 'Open Live App &#8599;' : 'View Project'}</a>
                 <a href="${project.githubHref}" target="_blank" class="btn btn-secondary btn-sm">GitHub &#8599;</a>
             </div>
         `;
@@ -238,7 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollToIndex(Math.max(0, centeredIndex - 1));
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            if (centeredIndex >= 0) window.location.href = PROJECTS[centeredIndex].href;
+            const project = PROJECTS[centeredIndex];
+            if (!project) return;
+            if (project.external) window.open(project.href, '_blank', 'noopener');
+            else window.location.href = project.href;
         }
     });
 
