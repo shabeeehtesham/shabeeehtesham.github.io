@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'NIGHTWATCH',
             tagline: 'A live OSINT globe built only from public data: flights, AIS ship traffic through the world\'s chokepoints, satellites propagated from TLEs, earthquakes, source-scored conflict reports from GDELT, news, submarine cables and ~9,000 public traffic and city cameras — served by an async FastAPI backend with per-source caching and graceful degradation.',
             tags: ['FastAPI', 'WebSockets', 'three.js', 'OSINT'],
-            href: 'https://nightwatch-gv6o.onrender.com',
+            href: 'https://140-245-227-191.sslip.io',
             external: true,
             githubHref: 'https://github.com/shabeeehtesham/nightwatch',
         },
