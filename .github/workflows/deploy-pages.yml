@@ -15,10 +15,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Two jobs: the deploy job only starts once the upload job has fully
+  # finished, so the artifact is always visible. In a single job,
+  # deploy-pages sometimes couldn't find the "github-pages" artifact yet.
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,6 +32,13 @@ jobs:
         with:
           path: "."
 
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
